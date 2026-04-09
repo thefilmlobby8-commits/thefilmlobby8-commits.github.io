@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Liam Canet Leiva & Martin Litvin — Soundtrack / Cinematic Music</title>
+  <meta name="description" content="Liam Canet Leiva & Martin Litvin — cinematic soundtrack music. Watch videos and listen on streaming platforms." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b0f19;
+      --stroke: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.88);
+      --muted: rgba(255,255,255,.65);
+      --accent: #79f2c0;
+      --accent2:#7aa7ff;
+    }
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 10% 0%, rgba(122,167,255,.18), transparent 55%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(121,242,192,.14), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+    }
+    .navbar{
+      background: rgba(11,15,25,.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--stroke);
+    }
+    .section{ padding: 3rem 0; }
+    .pill{
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      padding: .4rem .75rem;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+      font-size: .9rem;
+    }
+    .display-title{ letter-spacing: -0.03em; line-height: 1.05; }
+    .subtext{ color: var(--muted); }
+
+    .btn-accent{
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      color: #0b0f19;
+      font-weight: 800;
+    }
+    .btn-accent:hover{ filter: brightness(1.05); }
+
+    .glass{
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+    }
+    .video-card{
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .video-card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    /* COVER + CAROUSEL */
+    .cover{
+      position: relative;
+      min-height: 56vh;
+      max-height: 72vh;
+      overflow: hidden;
+      border-bottom: 1px solid var(--stroke);
+    }
+    .cover .container{ position: relative; z-index: 2; }
+    .cover::after{
+      content:"";
+      position:absolute; inset:0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(11,15,25,.25) 0%, rgba(11,15,25,.78) 75%, rgba(11,15,25,1) 100%);
+      pointer-events: none;
+    }
+
+    .cover-carousel{ pointer-events: none; }
+    .cover-carousel,
+    .cover-carousel .carousel-inner,
+    .cover-carousel .carousel-item{
+      height: clamp(420px, 64vh, 720px);
+    }
+    .cover-carousel .carousel-item img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .cover-content{
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      align-items: end;
+      padding: 4.5rem 0 1.25rem;
+    }
+
+    video{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: #000;
+    }
+    .meta{
+      margin-top: .65rem;
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+    }
+    .meta .director{
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    footer{
+      padding: 2rem 0 2.5rem;
+      border-top: 1px solid var(--stroke);
+      color: var(--muted);
+    }
+    .link-muted{ color: var(--muted); text-decoration: none; }
+    .link-muted:hover{ color: white; }
+
+    /* Bottom contact block */
+    .contact-panel{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .contact-panel .left{
+      padding: 2rem;
+      border-right: 1px solid rgba(255,255,255,.10);
+    }
+    @media (max-width: 991.98px){
+      .contact-panel .left{ border-right: 0; border-bottom: 1px solid rgba(255,255,255,.10); }
+    }
+    .contact-panel .right{ padding: 2rem; }
+    .ig-chip{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .9rem 1rem;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+      text-decoration: none;
+      color: rgba(255,255,255,.85);
+    }
+    .ig-chip:hover{ border-color: rgba(255,255,255,.28); color: #fff; }
+    .ig-handle{ color: var(--muted); font-size: .92rem; }
+
+    /* AWARDS (robust: doesn't depend on Bootstrap ratio) */
+    .awards-grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    @media (max-width: 991.98px){
+      .awards-grid{ grid-template-columns: 1fr; }
+    }
+    .award-poster{
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255,255,255,.04);
+      height: 520px;
+    }
+    @media (max-width: 991.98px){
+      .award-poster{ height: 560px; }
+    }
+    .award-poster img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Liam Canet Leiva &amp; Martin Litvin</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#contact-top">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#commercials">Commercials</a></li>
+          <li class="nav-item"><a class="nav-link" href="#videos">Films</a></li>
+          <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
+          <li class="nav-item"><a class="nav-link" href="#links">Platforms</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact-bottom">Get in touch</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- COVER WITH AUTO CAROUSEL -->
+  <header class="cover">
+    <div id="coverCarousel" class="carousel slide cover-carousel carousel-fade"
+         data-bs-ride="carousel"
+         data-bs-interval="4500"
+         data-bs-pause="false"
+         data-bs-touch="false"
+         data-bs-wrap="true">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="assets/Foto%205-2-26%2C%2019%2026%2031.jpg" alt="Cover photo 1">
+        </div>
+        <div class="carousel-item">
+          <img src="assets/Foto%205-2-26%2C%2020%2000%2056.jpg" alt="Cover photo 2">
+        </div>
+        <div class="carousel-item">
+            <img src="assets/Foto%205-2-26%2C%2019%2057%2027.jpg" alt="Cover photo 3">
+        </div>
+        <div class="carousel-item ">
+          <img src="assets/Foto%205-2-26%2C%2019%2022%2000.jpg" alt="Cover photo 4">
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="cover-content">
+      <div class="container">
+        <div class="row g-3 align-items-end">
+          <div class="col-lg-9">
+            <span class="pill mb-3">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+              Soundtrack • Cinematic
+            </span>
+            <h1 class="display-5 fw-bold display-title mb-2">Liam Canet Leiva &amp; Martin Litvin</h1>
+            <p class="lead subtext mb-0">Cinematic soundtrack music for film, fashion and commercial projects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTACT (TOP) -->
+  <section id="contact-top" class="section pt-4">
+    <div class="container">
+      <div class="glass p-4 p-md-5">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <h2 class="h3 fw-bold mb-2">Contact</h2>
+            <p class="subtext mb-0">Licensing, booking or collaborations — email is preferred.</p>
+          </div>
+
+          <div class="col-lg-4 d-flex gap-2 justify-content-lg-end flex-wrap">
+            <button class="btn btn-accent btn-lg w-100" id="emailBtnTop" type="button">Email</button>
+            <div class="small subtext mt-2 w-100" id="emailMsgTop" style="display:none;"></div>
+
+            <div class="w-100 d-flex flex-column gap-2 mt-2">
+              <a class="btn btn-outline-light" href="https://www.instagram.com/liamcanetleiva.martinlitvin/?hl=es-la" target="_blank" rel="noopener">
+                Instagram (duo)
+              </a>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-light flex-fill" href="https://www.instagram.com/liamcanet/?hl=es-la" target="_blank" rel="noopener">Liam IG</a>
+                <a class="btn btn-outline-light flex-fill" href="https://www.instagram.com/martinlitvin/?hl=es-la" target="_blank" rel="noopener">Martin IG</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMERCIALS -->
+  <section id="commercials" class="section">
+    <div class="container">
+      <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+        <div>
+          <h2 class="h3 fw-bold mb-1">Commercials</h2>
+          <p class="subtext mb-0">Selected commercial work.</p>
+        </div>
+        <a class="link-muted" href="#videos">Go to films →</a>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">ACE Commercial</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/ACE%20Commercial.mp4" type="video/quicktime">
+                <source src="assets/ACE%20Commercial.mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Manuel Levy</div></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">TRANSSOCIAL PROMO</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/FINAL%20TRANSSOCIAL%20PROMO%20VIDEO%20FEB%202ND.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Nina Demarchi</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILMS / PORTFOLIO -->
+  <section id="videos" class="section">
+    <div class="container">
+      <div class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-3">
+        <div>
+          <h2 class="h3 fw-bold mb-1">Films / Portfolio</h2>
+          <p class="subtext mb-0">Selected film work.</p>
+        </div>
+        <a class="link-muted" href="#links">Platforms →</a>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">How To Get Your Wings</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/How%20To%20Get%20Your%20Wings.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Martina Casas (Mosaico Studios)</div></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">Japanease Jazz - Fashion Film</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/Japanease%20Jazz%20-%20Fashion%20Film.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Luna Montero</div></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">Parallel</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/Parralell.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Tayla Dayan</div></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">MISS LONELY</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/VIDEO-2026-03-13-19-41-09%20copia.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Nina Demarchi</div></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">WALKING ON THE MOON</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/WALKING%20ON%20THE%20MOON%20PORTFOLIO.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Steve Sanchez Rosales (PinkBlueWhite Films)</div></div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="video-card p-3">
+            <div class="fw-semibold">FRAGMENTS OF YESTERDAY</div>
+            <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+              <video controls preload="metadata" playsinline>
+                <source src="assets/FRAGMENTS%20EDIT%20PORTFOLIO.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="meta"><div class="director">Director: Iara Scherer Keen</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS (robust grid) -->
+  <section id="awards" class="section pt-0">
+    <div class="container">
+      <div class="mb-3">
+        <h2 class="h3 fw-bold mb-1">Awards / Festivals</h2>
+        <p class="subtext mb-0">Selections and recognitions.</p>
+      </div>
+
+      <div class="awards-grid">
+        <div class="award-poster">
+          <img src="assets/spilled%20milk%20premio.jpeg" alt="Spilled Milk — awards poster" loading="lazy">
+        </div>
+        <div class="award-poster">
+          <img src="assets/parallel%20premio.jpeg" alt="Parallel — awards poster" loading="lazy">
+        </div>
+        <div class="award-poster">
+          <img src="assets/fragments%20premio.jpeg" alt="Fragments of Yesterday — awards poster" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORMS -->
+  <section id="links" class="section">
+    <div class="container">
+      <div class="glass p-4 p-md-5">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h2 class="h3 fw-bold mb-2">Listen / Watch</h2>
+            <p class="subtext mb-0">Official links for Liam, Martin and the duo.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="d-grid gap-2">
+              <a class="btn btn-accent btn-lg" href="https://open.spotify.com/artist/0i8ZTFKB0quPhoMwB556XO?si=6OovVANZS0ab2JDSock1MA" target="_blank" rel="noopener">Spotify (duo)</a>
+              <a class="btn btn-outline-light btn-lg" href="https://open.spotify.com/artist/28J1IlTRPKgJAXs3Rtazir?si=a7NZeGL0Rk6XzxCnqFPVKg" target="_blank" rel="noopener">Spotify (Liam)</a>
+              <a class="btn btn-outline-light btn-lg" href="https://music.apple.com/es/artist/liam-canet-leiva-martin-litvin/1889158718" target="_blank" rel="noopener">Apple Music (duo)</a>
+              <a class="btn btn-outline-light btn-lg" href="https://music.apple.com/es/artist/liam-canet-leiva/1627041282" target="_blank" rel="noopener">Apple Music (Liam)</a>
+              <a class="btn btn-outline-light btn-lg" href="https://www.youtube.com/channel/UC_3McRYWmn9jRANBt9jjrQA" target="_blank" rel="noopener">YouTube (Liam)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK INQUIRY (BOTTOM) -->
+  <section id="contact-bottom" class="section">
+    <div class="container">
+      <div class="contact-panel">
+        <div class="row g-0">
+          <div class="col-lg-7 left">
+            <span class="pill mb-3">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--accent2);display:inline-block"></span>
+              Quick inquiry
+            </span>
+
+            <h2 class="h3 fw-bold mb-2">Let’s work together</h2>
+            <p class="subtext mb-4">For licensing, booking, commissions or collaborations, email is preferred.</p>
+
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+              <button class="btn btn-accent btn-lg" id="emailBtnBottom" type="button">Copy email</button>
+              <a class="btn btn-outline-light btn-lg" href="#links">Listen / Watch</a>
+            </div>
+
+            <div class="small subtext mt-3" id="emailMsgBottom" style="display:none;"></div>
+          </div>
+
+          <div class="col-lg-5 right">
+            <div class="fw-semibold mb-3">Instagram</div>
+
+            <div class="d-grid gap-2">
+              <a class="ig-chip" href="https://www.instagram.com/liamcanetleiva.martinlitvin/?hl=es-la" target="_blank" rel="noopener">
+                <div>
+                  <div class="fw-semibold">Duo</div>
+                  <div class="ig-handle">@liamcanetleiva.martinlitvin</div>
+                </div>
+                <div class="ig-handle">Open →</div>
+              </a>
+
+              <a class="ig-chip" href="https://www.instagram.com/liamcanet/?hl=es-la" target="_blank" rel="noopener">
+                <div>
+                  <div class="fw-semibold">Liam</div>
+                  <div class="ig-handle">@liamcanet</div>
+                </div>
+                <div class="ig-handle">Open →</div>
+              </a>
+
+              <a class="ig-chip" href="https://www.instagram.com/martinlitvin/?hl=es-la" target="_blank" rel="noopener">
+                <div>
+                  <div class="fw-semibold">Martin</div>
+                  <div class="ig-handle">@martinlitvin</div>
+                </div>
+                <div class="ig-handle">Open →</div>
+              </a>
+            </div>
+
+            <div class="subtext small mt-3">Prefer email for project details and licensing.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex flex-wrap gap-2 justify-content-between align-items-center">
+      <div>
+        © <span id="year"></span> Liam Canet Leiva &amp; Martin Litvin — Soundtrack / Cinematic
+        <span class="mx-2">•</span>
+        Website made by
+        <a class="link-muted" href="https://www.linkedin.com/in/ocanetleiva/" target="_blank" rel="noopener">Oliver</a>.
+      </div>
+      <div class="d-flex gap-3">
+        <a class="link-muted" href="#contact-top">Contact</a>
+        <a class="link-muted" href="#commercials">Commercials</a>
+        <a class="link-muted" href="#videos">Films</a>
+        <a class="link-muted" href="#awards">Awards</a>
+        <a class="link-muted" href="#links">Platforms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const EMAIL = "liamcanetleivamartinlitvin@gmail.com";
+
+    async function revealAndCopy(msgEl){
+      msgEl.style.display = "block";
+      try{
+        await navigator.clipboard.writeText(EMAIL);
+        msgEl.innerHTML = `Email: <span class="text-white">${EMAIL}</span> (copied)`;
+      }catch(e){
+        msgEl.innerHTML = `Email: <span class="text-white">${EMAIL}</span>`;
+      }
+      setTimeout(() => { msgEl.style.display = "none"; }, 3500);
+    }
+
+    document.getElementById("emailBtnTop")?.addEventListener("click", () => {
+      revealAndCopy(document.getElementById("emailMsgTop"));
+    });
+
+    document.getElementById("emailBtnBottom")?.addEventListener("click", () => {
+      revealAndCopy(document.getElementById("emailMsgBottom"));
+    });
+  </script>
+</body>
+</html>
